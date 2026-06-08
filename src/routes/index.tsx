@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ProjectCard } from "@/components/project_card";
 import { projects } from "@/lib/projects_data";
 import { SearchPalette } from "@/components/search_palette";
+import { WelcomeModal } from "@/components/welcome_modal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -76,6 +77,7 @@ function DashboardIndex() {
   const formattedTime = time.toLocaleTimeString("es-MX", {
     hour: "2-digit",
     minute: "2-digit",
+    second: "2-digit",
   });
 
   const sortedProjects = [...projects].sort((a, b) => {
@@ -156,11 +158,11 @@ function DashboardIndex() {
 
             {/* Reloj Dinámico */}
             <div
-              className={`mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300 backdrop-blur-md animate-fade-up transition-opacity duration-500 ${mounted ? "opacity-100" : "opacity-0"}`}
+              className={`mb-4 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-zinc-300 backdrop-blur-md animate-fade-up transition-opacity duration-500 ${mounted ? "opacity-100" : "opacity-0"}`}
               style={{ animationDelay: "150ms", animationFillMode: "both" }}
             >
-              <Clock className="h-3.5 w-3.5 text-blue-400" />
-              <span>{mounted ? formattedTime : "--:--"}</span>
+              <Clock className="h-4 w-4 text-blue-400" />
+              <span className="font-mono tracking-wider">{mounted ? formattedTime : "--:--:--"}</span>
             </div>
 
             <h1
@@ -190,6 +192,7 @@ function DashboardIndex() {
           ))}
         </section>
       </div>
+      <WelcomeModal />
     </div>
   );
 }
