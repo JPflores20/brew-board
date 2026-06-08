@@ -1,5 +1,6 @@
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Star } from "lucide-react";
 import type { Project } from "@/lib/projects_data";
+import { useRef } from "react";
 
 const techStyles: Record<string, string> = {
   React: "bg-cyan-500/10 text-cyan-300 border-cyan-400/20",
@@ -11,9 +12,17 @@ const techStyles: Record<string, string> = {
 
 const defaultTech = "bg-white/5 text-zinc-300 border-white/10";
 
-import { useRef } from "react";
-
-export function ProjectCard({ project, index = 0 }: { project: Project; index?: number }) {
+export function ProjectCard({
+  project,
+  index = 0,
+  isFavorite = false,
+  onToggleFavorite,
+}: {
+  project: Project;
+  index?: number;
+  isFavorite?: boolean;
+  onToggleFavorite?: () => void;
+}) {
   const Icon = project.icon;
   const cardRef = useRef<HTMLAnchorElement>(null);
 
@@ -45,10 +54,28 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
         aria-hidden="true"
       />
 
-      <ExternalLink
-        className="absolute right-4 top-4 h-4 w-4 text-zinc-400 opacity-60 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue-300 group-hover:opacity-100 z-10"
-        aria-hidden="true"
-      />
+      <div className="absolute right-4 top-4 z-20 flex items-center gap-3">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onToggleFavorite?.();
+          }}
+          className={`transition-all duration-300 hover:scale-110 ${
+            isFavorite
+              ? "text-yellow-400 opacity-100 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]"
+              : "text-zinc-500 opacity-40 hover:text-yellow-400 group-hover:opacity-100"
+          }`}
+          title={isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
+        >
+          <Star className="h-[18px] w-[18px]" fill={isFavorite ? "currentColor" : "none"} />
+        </button>
+        <ExternalLink
+          className="h-4 w-4 text-zinc-400 opacity-60 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue-300 group-hover:opacity-100"
+          aria-hidden="true"
+        />
+      </div>
 
       <div className="relative z-10 mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-linear-to-br from-blue-500/20 via-indigo-500/10 to-violet-500/20 text-blue-200 shadow-inner shadow-white/5 transition-colors duration-300 group-hover:text-cyan-200">
         <Icon className="h-5 w-5" aria-hidden="true" />

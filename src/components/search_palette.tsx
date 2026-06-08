@@ -53,6 +53,7 @@ export function SearchPalette() {
               return (
                 <CommandItem
                   key={project.name}
+                  value={project.name}
                   onSelect={() => handleSelect(project.url)}
                   className="flex items-center gap-3 py-3 cursor-pointer"
                 >

@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Clock } from "lucide-react";
+import { useState, useEffect } from "react";
 import { ProjectCard } from "@/components/project_card";
 import { projects } from "@/lib/projects_data";
 import { SearchPalette } from "@/components/search_palette";
@@ -21,26 +21,70 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  component: Index,
+  component: DashboardIndex,
 });
 
-function Index() {
-  const [isDark, setIsDark] = useState(false);
+function DashboardIndex() {
+  const [isDark, setIsDark] = useState(true);
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [time, setTime] = useState(new Date());
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem("theme");
-    const prefersDark =
-      stored === "dark" || (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches);
-    setIsDark(prefersDark);
-    document.documentElement.classList.toggle("dark", prefersDark);
+    setMounted(true);
+    // Load theme
+    const isDarkTheme = document.documentElement.classList.contains("dark");
+    setIsDark(isDarkTheme);
+
+    // Load favorites
+    const savedFavs = localStorage.getItem("brew-board-favorites");
+    if (savedFavs) {
+      try {
+        setFavorites(JSON.parse(savedFavs));
+      } catch (e) {}
+    }
+
+    // Start clock
+    const interval = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const toggleTheme = () => {
-    const next_theme = !isDark;
-    setIsDark(next_theme);
-    document.documentElement.classList.toggle("dark", next_theme);
-    localStorage.setItem("theme", next_theme ? "dark" : "light");
+    const root = document.documentElement;
+    root.classList.toggle("dark");
+    setIsDark(!isDark);
   };
+
+  const toggleFavorite = (url: string) => {
+    setFavorites((prev) => {
+      const isFav = prev.includes(url);
+      const newFavs = isFav ? prev.filter((f) => f !== url) : [...prev, url];
+      localStorage.setItem("brew-board-favorites", JSON.stringify(newFavs));
+      return newFavs;
+    });
+  };
+
+  const getGreeting = () => {
+    const hour = time.getHours();
+    if (hour >= 5 && hour < 12) return "Buenos días, Equipo";
+    if (hour >= 12 && hour < 19) return "Buenas tardes, Equipo";
+    return "Buenas noches, Equipo";
+  };
+
+  const formattedTime = time.toLocaleTimeString("es-MX", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const sortedProjects = [...projects].sort((a, b) => {
+    const aFav = favorites.includes(a.url);
+    const bFav = favorites.includes(b.url);
+    if (aFav && !bFav) return -1;
+    if (!aFav && bFav) return 1;
+    return 0;
+  });
 
   return (
     <div className="relative min-h-screen text-zinc-100">
@@ -109,24 +153,40 @@ function Index() {
                 className="relative h-40 w-40 rounded-[2rem] object-cover shadow-2xl ring-2 ring-white/10 transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-105 group-hover:-rotate-3 group-hover:shadow-[0_20px_50px_rgba(8,-112,184,0.4)] group-hover:ring-white/30"
               />
             </div>
+
+            {/* Reloj Dinámico */}
+            <div
+              className={`mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300 backdrop-blur-md animate-fade-up transition-opacity duration-500 ${mounted ? "opacity-100" : "opacity-0"}`}
+              style={{ animationDelay: "150ms", animationFillMode: "both" }}
+            >
+              <Clock className="h-3.5 w-3.5 text-blue-400" />
+              <span>{mounted ? formattedTime : "--:--"}</span>
+            </div>
+
             <h1
               className="bg-linear-to-r from-blue-400 via-cyan-300 to-violet-400 bg-clip-text pb-2 text-4xl font-semibold tracking-tight text-transparent sm:text-5xl animate-fade-up"
-              style={{ animationDelay: "200ms" }}
+              style={{ animationDelay: "200ms", animationFillMode: "both" }}
             >
-              Panel de Proyectos
+              {mounted ? getGreeting() : "Cargando..."}
             </h1>
             <p
               className="mt-4 text-sm text-zinc-400 sm:text-base animate-fade-up"
-              style={{ animationDelay: "300ms" }}
+              style={{ animationDelay: "300ms", animationFillMode: "both" }}
             >
-              Hub central de aplicaciones
+              Panel de herramientas
             </p>
           </div>
         </header>
 
         <section className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, project_index) => (
-            <ProjectCard key={project.url} project={project} index={project_index} />
+          {sortedProjects.map((project, project_index) => (
+            <ProjectCard
+              key={project.name}
+              project={project}
+              index={project_index}
+              isFavorite={favorites.includes(project.url)}
+              onToggleFavorite={() => toggleFavorite(project.url)}
+            />
           ))}
         </section>
       </div>
