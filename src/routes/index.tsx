@@ -43,35 +43,31 @@ function Index() {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#070710] text-zinc-100">
-      {/* Ambient background: radial gradient + colored orbs + grid mesh */}
+    <div className="relative min-h-screen text-zinc-100">
+      {/* Animated Gemini-style background — fixed so it doesn't scroll */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(1200px 600px at 50% -10%, rgba(59,130,246,0.18), transparent 60%), radial-gradient(800px 500px at 100% 100%, rgba(168,85,247,0.15), transparent 60%), radial-gradient(700px 400px at 0% 80%, rgba(245,158,11,0.10), transparent 60%)",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
-          backgroundSize: "44px 44px",
-          maskImage:
-            "radial-gradient(ellipse at 50% 0%, black 40%, transparent 75%)",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-blue-500/20 blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-violet-500/20 blur-3xl"
-      />
+        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-slate-950"
+      >
+        {/* Subtle grid mesh */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+            backgroundSize: "44px 44px",
+            maskImage:
+              "radial-gradient(ellipse at 50% 0%, black 40%, transparent 75%)",
+          }}
+        />
+        {/* Floating orbs */}
+        <div className="animate-orb-a absolute -top-[10vw] -left-[10vw] h-[45vw] w-[45vw] rounded-full bg-blue-600 opacity-40 blur-[120px]" />
+        <div className="animate-orb-b absolute top-[10vh] -right-[12vw] h-[40vw] w-[40vw] rounded-full bg-violet-600 opacity-40 blur-[130px]" />
+        <div className="animate-orb-c absolute -bottom-[10vw] left-[20vw] h-[42vw] w-[42vw] rounded-full bg-cyan-500 opacity-30 blur-[140px]" />
+        <div className="animate-orb-d absolute bottom-[5vh] right-[15vw] h-[30vw] w-[30vw] rounded-full bg-fuchsia-500 opacity-25 blur-[120px]" />
+        {/* Soft vignette to keep contrast on cards */}
+        <div className="absolute inset-0 bg-slate-950/30" />
+      </div>
 
       <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         <header className="mb-14 flex items-start justify-between gap-4">
