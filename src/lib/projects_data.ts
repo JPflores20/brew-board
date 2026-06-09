@@ -7,18 +7,11 @@ import {
   Box,
   BookOpen,
   ShieldCheck,
-  type LucideIcon,
 } from "lucide-react";
+import type { Project } from "@/types/Project";
 
-export type Project = {
-  name: string;
-  description: string;
-  tagline?: string;
-  stack: string[];
-  url: string;
-  icon: LucideIcon;
-};
-
+// Lista de proyectos disponibles en el panel de control.
+// Contiene la información estática de cada proyecto como su nombre, descripción, tecnologías, URL e ícono a mostrar.
 export const projects: Project[] = [
   {
     name: "Brew Insights",

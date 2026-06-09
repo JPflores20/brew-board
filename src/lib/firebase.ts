@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
+// Configuración del proyecto de Firebase con las credenciales necesarias
 const firebaseConfig = {
   apiKey: "AIzaSyCtD4houtwdnE5TCZhioqHdGNdWxlo5ej8",
   authDomain: "brew-f4449.firebaseapp.com",
@@ -11,5 +12,8 @@ const firebaseConfig = {
   measurementId: "G-QDJR04C6WJ"
 };
 
+// Inicializamos la aplicación de Firebase con la configuración
 export const app = initializeApp(firebaseConfig);
+
+// Inicializamos Analytics solo si estamos en el entorno del navegador (cliente) para evitar errores en SSR
 export const analytics = typeof window !== "undefined" ? getAnalytics(app) : null;
