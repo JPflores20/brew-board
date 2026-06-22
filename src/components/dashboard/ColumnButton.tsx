@@ -13,13 +13,13 @@ export function ColumnButton({ icon, label, url, accentColor, className = "" }: 
   const isStringIcon = typeof icon === 'string';
 
   const colorStyles = {
-    green: "hover:border-green-500/50 hover:bg-green-500/10 hover:shadow-green-500/20 text-green-500 [&_svg]:text-green-500",
-    blue: "hover:border-blue-500/50 hover:bg-blue-500/10 hover:shadow-blue-500/20 text-blue-500 [&_svg]:text-blue-500",
-    teal: "hover:border-teal-500/50 hover:bg-teal-500/10 hover:shadow-teal-500/20 text-teal-500 [&_svg]:text-teal-500"
+    green: "hover:border-green-400 hover:bg-green-500/10 hover:shadow-[0_0_15px_rgba(34,197,94,0.4)] text-green-500 [&_svg]:text-green-500",
+    blue: "hover:border-blue-400 hover:bg-blue-500/10 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] text-blue-500 [&_svg]:text-blue-500",
+    teal: "hover:border-teal-400 hover:bg-teal-500/10 hover:shadow-[0_0_15px_rgba(20,184,166,0.4)] text-teal-500 [&_svg]:text-teal-500"
   };
 
   const borderStyles = "border border-white/10 bg-white/5 rounded-xl";
-  const baseHover = "transition-all duration-300 hover:-translate-y-1 hover:shadow-lg";
+  const baseHover = "transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] group";
 
   return (
     <a 
@@ -28,7 +28,7 @@ export function ColumnButton({ icon, label, url, accentColor, className = "" }: 
       rel={url ? "noopener noreferrer" : ""}
       className={`flex flex-col items-center justify-center p-3 gap-2 text-center ${borderStyles} ${baseHover} ${colorStyles[accentColor]} ${className}`}
     >
-      <div className="h-10 w-10 flex items-center justify-center">
+      <div className="h-10 w-10 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 drop-shadow-md group-hover:drop-shadow-[0_0_8px_currentColor]">
         {typeof icon === 'string' ? (
            <span className="text-2xl font-bold font-sans tracking-tighter">{icon}</span>
         ) : React.isValidElement(icon) ? (

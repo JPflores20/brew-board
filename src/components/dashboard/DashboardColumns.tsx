@@ -6,6 +6,8 @@ import {
 } from "lucide-react";
 import { projects } from "@/lib/projects_data";
 import { GrafanaIcon } from "./GrafanaIcon";
+import { SorbaIcon } from "./SorbaIcon";
+import { motion } from "framer-motion";
 
 export function DashboardColumns() {
   const getUrl = (name: string) => projects.find(p => p.name.toLowerCase().includes(name.toLowerCase()))?.url;
@@ -14,7 +16,12 @@ export function DashboardColumns() {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1400px] mx-auto w-full px-4 pb-12 pt-8 flex-1">
       
       {/* Control de Procesos */}
-      <div className="flex flex-col rounded-[2rem] border border-green-500/20 bg-[#061017]/90 backdrop-blur-md p-6 sm:p-8 relative overflow-hidden group hover:border-green-500/40 transition-colors duration-500 shadow-2xl">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+        className="flex flex-col rounded-[2rem] border border-green-500/20 bg-[#061017]/90 backdrop-blur-md p-6 sm:p-8 relative overflow-hidden group hover:border-green-500/40 transition-colors duration-500 shadow-2xl"
+      >
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-1 bg-green-500 rounded-b-md shadow-[0_0_20px_rgba(34,197,94,0.8)]"></div>
         
         <div className="flex flex-col items-center mb-8 mt-2">
@@ -38,10 +45,15 @@ export function DashboardColumns() {
         <button className="w-full py-4 mt-auto rounded-xl border border-green-500/30 text-green-500 font-semibold text-sm hover:bg-green-500/10 hover:border-green-500/60 flex items-center justify-center gap-2 transition-all duration-300 shadow-[0_0_10px_rgba(34,197,94,0.1)] hover:shadow-[0_0_15px_rgba(34,197,94,0.2)]">
           <BarChart2 className="h-5 w-5" /> DASHBOARD DE PROCESOS
         </button>
-      </div>
+      </motion.div>
 
       {/* Mantenimiento */}
-      <div className="flex flex-col rounded-[2rem] border border-blue-500/20 bg-[#061017]/90 backdrop-blur-md p-6 sm:p-8 relative overflow-hidden group hover:border-blue-500/40 transition-colors duration-500 shadow-2xl">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.25 }}
+        className="flex flex-col rounded-[2rem] border border-blue-500/20 bg-[#061017]/90 backdrop-blur-md p-6 sm:p-8 relative overflow-hidden group hover:border-blue-500/40 transition-colors duration-500 shadow-2xl"
+      >
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-1 bg-blue-500 rounded-b-md shadow-[0_0_20px_rgba(59,130,246,0.8)]"></div>
         
         <div className="flex flex-col items-center mb-8 mt-2">
@@ -63,10 +75,15 @@ export function DashboardColumns() {
         <button className="w-full py-4 mt-auto rounded-xl border border-blue-500/30 text-blue-500 font-semibold text-sm hover:bg-blue-500/10 hover:border-blue-500/60 flex items-center justify-center gap-2 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.1)] hover:shadow-[0_0_15px_rgba(59,130,246,0.2)]">
           <BarChart2 className="h-5 w-5" /> DASHBOARD DE MANTENIMIENTO
         </button>
-      </div>
+      </motion.div>
 
       {/* VPO Digital */}
-      <div className="flex flex-col rounded-[2rem] border border-teal-500/20 bg-[#061017]/90 backdrop-blur-md p-6 sm:p-8 relative overflow-hidden group hover:border-teal-500/40 transition-colors duration-500 shadow-2xl">
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.4 }}
+        className="flex flex-col rounded-[2rem] border border-teal-500/20 bg-[#061017]/90 backdrop-blur-md p-6 sm:p-8 relative overflow-hidden group hover:border-teal-500/40 transition-colors duration-500 shadow-2xl"
+      >
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-1 bg-teal-500 rounded-b-md shadow-[0_0_20px_rgba(20,184,166,0.8)]"></div>
         
         <div className="flex flex-col items-center mb-8 mt-2">
@@ -87,13 +104,13 @@ export function DashboardColumns() {
           <ColumnButton accentColor="teal" icon={(props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center"></div>} label="Suite 360" />
           <ColumnButton accentColor="teal" icon={BarChart2} label="Brewinsights" url={getUrl("insights")} />
           <ColumnButton accentColor="teal" icon={GrafanaIcon} label="Grafana" />
-          <ColumnButton accentColor="teal" icon={Droplet} label="Sorba" />
+          <ColumnButton accentColor="teal" icon={SorbaIcon} label="Sorba" />
         </div>
         
         <div className="w-full flex justify-center pb-2">
             <ColumnButton className="w-1/2 py-2 flex-row border-none shadow-none bg-transparent hover:bg-teal-500/10" accentColor="teal" icon={(props: any) => <div className="bg-teal-900/60 text-teal-400 font-bold px-4 py-2 rounded-lg border border-teal-500/30 tracking-widest text-lg">SAP</div>} label="" url={getUrl("sap")} />
         </div>
-      </div>
+      </motion.div>
 
     </div>
   );
