@@ -19,9 +19,9 @@ export function ClockWidget() {
   if (!isMounted) {
     return (
       <div
-        className="mb-4 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-zinc-300 backdrop-blur-md opacity-0"
+        className="mb-4 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-xl font-medium text-zinc-300 backdrop-blur-md opacity-0"
       >
-        <Clock className="h-4 w-4 text-blue-400" />
+        <Clock className="h-6 w-6 text-yellow-500" />
         <span className="font-mono tracking-wider">--:--:--</span>
       </div>
     );
@@ -30,10 +30,10 @@ export function ClockWidget() {
   // Una vez montado, mostramos el widget animado con la hora real
   return (
     <div
-      className="mb-4 inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-zinc-300 backdrop-blur-md animate-fade-up transition-opacity duration-500 opacity-100"
+      className="mb-4 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-xl font-medium text-zinc-300 backdrop-blur-md animate-fade-up transition-opacity duration-500 opacity-100"
       style={{ animationDelay: "150ms", animationFillMode: "both" }}
     >
-      <Clock className="h-4 w-4 text-blue-400" />
+      <Clock className="h-6 w-6 text-yellow-500" />
       <span className="font-mono tracking-wider">{formattedTime}</span>
     </div>
   );

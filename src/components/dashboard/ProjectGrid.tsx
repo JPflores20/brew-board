@@ -25,7 +25,7 @@ export function ProjectGrid() {
   });
 
   return (
-    <section className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+    <section className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
       {/* Recorremos todos los proyectos ordenados e instanciamos sus tarjetas correspondientes */}
       {sortedProjects.map((project, index) => {
         // Evaluamos en tiempo real si el proyecto que estamos recorriendo es uno de los favoritos

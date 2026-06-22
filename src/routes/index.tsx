@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { WelcomeModal } from "@/components/welcome_modal";
-import { BackgroundEffects } from "@/components/dashboard/BackgroundEffects";
 import { Header } from "@/components/dashboard/Header";
-import { ProjectGrid } from "@/components/dashboard/ProjectGrid";
+import { DashboardColumns } from "@/components/dashboard/DashboardColumns";
+import { Footer } from "@/components/dashboard/Footer";
 
 // Definimos y exportamos la ruta principal (raíz "/") usando el enrutador
 export const Route = createFileRoute("/")({
@@ -29,17 +29,15 @@ export const Route = createFileRoute("/")({
 // Componente principal de la vista del Dashboard (Panel)
 function DashboardIndex() {
   return (
-    <div className="relative min-h-screen text-zinc-100">
-      {/* Capa de efectos visuales de fondo */}
-      <BackgroundEffects />
-
-      {/* Contenedor principal para el contenido centrado y espaciado */}
-      <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-        {/* Encabezado con reloj, saludo y buscador */}
-        <Header />
-        {/* Cuadrícula interactiva con las tarjetas de proyectos */}
-        <ProjectGrid />
-      </div>
+    <div className="flex flex-col min-h-screen bg-[#030910] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#061421] via-[#030910] to-black text-zinc-100 font-sans selection:bg-yellow-500/30 overflow-x-hidden">
+      {/* Encabezado con Logo y Menú */}
+      <Header />
+      
+      {/* Contenedor principal de las 3 columnas */}
+      <DashboardColumns />
+      
+      {/* Pie de página con acciones secundarias */}
+      <Footer />
       
       {/* Modal de bienvenida que solo se muestra a usuarios nuevos */}
       <WelcomeModal />

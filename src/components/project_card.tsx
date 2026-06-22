@@ -48,13 +48,13 @@ export function ProjectCard({
       rel="noopener noreferrer"
       onMouseMove={handleMouseMove}
       style={{ animationDelay: `${500 + index * 100}ms` }}
-      className="group animate-fade-up relative flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-lg shadow-black/20 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.06] hover:shadow-2xl hover:shadow-blue-500/20 overflow-hidden"
+      className="group animate-fade-up relative flex flex-col rounded-2xl border border-white/10 bg-white/[0.04] p-6 shadow-lg shadow-black/20 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-yellow-500/40 hover:bg-white/[0.06] hover:shadow-2xl hover:shadow-yellow-500/20 overflow-hidden"
     >
       {/* Efecto de destello dinámico (Spotlight Effect) que reacciona a la posición del ratón */}
       <div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
-          background: `radial-gradient(500px circle at var(--x, 0) var(--y, 0), rgba(59,130,246,0.15), transparent 40%)`,
+          background: `radial-gradient(500px circle at var(--x, 0) var(--y, 0), rgba(250,204,21,0.15), transparent 40%)`,
         }}
         aria-hidden="true"
       />
@@ -80,12 +80,12 @@ export function ProjectCard({
         </button>
         {/* Icono indicador visual de enlace externo */}
         <ExternalLink
-          className="h-4 w-4 text-zinc-400 opacity-60 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-blue-300 group-hover:opacity-100"
+          className="h-4 w-4 text-zinc-400 opacity-60 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-yellow-400 group-hover:opacity-100"
           aria-hidden="true"
         />
       </div>
 
-      <div className="relative z-10 mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-linear-to-br from-blue-500/20 via-indigo-500/10 to-violet-500/20 text-blue-200 shadow-inner shadow-white/5 transition-colors duration-300 group-hover:text-cyan-200">
+      <div className="relative z-10 mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-linear-to-br from-yellow-500/20 via-blue-900/40 to-slate-500/20 text-yellow-500 shadow-inner shadow-white/5 transition-colors duration-300 group-hover:text-yellow-200">
         {/* Representación visual de la categoría/herramienta principal */}
         <Icon className="h-5 w-5" aria-hidden="true" />
       </div>

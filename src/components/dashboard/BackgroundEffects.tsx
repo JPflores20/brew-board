@@ -5,7 +5,7 @@ export function BackgroundEffects() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-slate-950"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-black"
     >
       {/* Malla de cuadrícula sutil para dar textura geométrica al fondo */}
       <div
@@ -18,10 +18,10 @@ export function BackgroundEffects() {
         }}
       />
       {/* Esferas flotantes animadas con alto desenfoque para generar un efecto de luces de neón o aura */}
-      <div className="animate-orb-a absolute -top-[10vw] -left-[10vw] h-[45vw] w-[45vw] rounded-full bg-blue-600 opacity-40 blur-[120px]" />
-      <div className="animate-orb-b absolute top-[10vh] -right-[12vw] h-[40vw] w-[40vw] rounded-full bg-violet-600 opacity-40 blur-[130px]" />
-      <div className="animate-orb-c absolute -bottom-[10vw] left-[20vw] h-[42vw] w-[42vw] rounded-full bg-cyan-500 opacity-30 blur-[140px]" />
-      <div className="animate-orb-d absolute bottom-[5vh] right-[15vw] h-[30vw] w-[30vw] rounded-full bg-fuchsia-500 opacity-25 blur-[120px]" />
+      <div className="animate-orb-a absolute -top-[10vw] -left-[10vw] h-[45vw] w-[45vw] rounded-full bg-blue-900 opacity-40 blur-[120px]" />
+      <div className="animate-orb-b absolute top-[10vh] -right-[12vw] h-[40vw] w-[40vw] rounded-full bg-yellow-500 opacity-20 blur-[130px]" />
+      <div className="animate-orb-c absolute -bottom-[10vw] left-[20vw] h-[42vw] w-[42vw] rounded-full bg-gray-400 opacity-20 blur-[140px]" />
+      <div className="animate-orb-d absolute bottom-[5vh] right-[15vw] h-[30vw] w-[30vw] rounded-full bg-blue-950 opacity-40 blur-[120px]" />
       
       {/* Viñeta suave en los bordes para oscurecer y ayudar a mantener un buen contraste con las tarjetas del primer plano */}
       <div className="absolute inset-0 bg-slate-950/30" />
