@@ -28,13 +28,13 @@ export function ColumnButton({ icon, label, url, accentColor, className = "" }: 
       rel={url ? "noopener noreferrer" : ""}
       className={`flex flex-col items-center justify-center p-3 gap-2 text-center ${borderStyles} ${baseHover} ${colorStyles[accentColor]} ${className}`}
     >
-      <div className="h-10 w-10 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 drop-shadow-md group-hover:drop-shadow-[0_0_8px_currentColor]">
+      <div className="h-[42px] w-[42px] flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 drop-shadow-md group-hover:drop-shadow-[0_0_8px_currentColor]">
         {typeof icon === 'string' ? (
            <span className="text-2xl font-bold font-sans tracking-tighter">{icon}</span>
         ) : React.isValidElement(icon) ? (
            icon
         ) : (
-           React.createElement(icon as React.ElementType, { className: "h-7 w-7", strokeWidth: 1.5 })
+           React.createElement(icon as React.ElementType, { className: "h-[31px] w-[31px]", strokeWidth: 1.5 })
         )}
       </div>
       {label && <span className="text-[10px] md:text-xs font-semibold text-zinc-300 uppercase tracking-wider">{label}</span>}

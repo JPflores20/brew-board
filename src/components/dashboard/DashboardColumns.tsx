@@ -2,11 +2,15 @@ import { ColumnButton } from "./ColumnButton";
 import { 
   Droplet, Leaf, Database, Filter, Target, 
   Calendar, BarChart2, ClipboardList, Gauge, Settings, PenTool,
-  Shield, MessageSquare, Hexagon, Circle, Cog, CalendarClock
+  Shield, MessageSquare, Hexagon, Circle, Cog, CalendarClock,
+  Users, FlaskConical, Layers, ListChecks, DollarSign, Monitor, Wrench, Wheat, Map
 } from "lucide-react";
 import { projects } from "@/lib/projects_data";
 import { GrafanaIcon } from "./GrafanaIcon";
 import { SorbaIcon } from "./SorbaIcon";
+import { TankIcon } from "./TankIcon";
+import { FilterBBTIcon } from "./FilterBBTIcon";
+import { GrainIcon } from "./GrainIcon";
 import { motion } from "framer-motion";
 
 export function DashboardColumns() {
@@ -33,13 +37,15 @@ export function DashboardColumns() {
 
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-8 flex-1">
           <ColumnButton accentColor="green" icon={Droplet} label="Higiene" />
-          <ColumnButton accentColor="green" icon={Leaf} label="Materias Primas" />
-          <ColumnButton accentColor="green" icon={Database} label="B.O.C (Breawing Operator Control)" url={getUrl("Brewing Operator")} />
+          <ColumnButton accentColor="green" icon={Wheat} label="Materias Primas" />
+          <ColumnButton accentColor="green" icon={Monitor} label="B.O.C (Breawing Operator Control)" url={getUrl("Brewing Operator")} />
           <ColumnButton accentColor="green" icon={Database} label="TCCs" />
-          <ColumnButton accentColor="green" icon={Filter} label="Filtros-BBTs" />
-          <ColumnButton accentColor="green" icon={Gauge} label="Blender" />
+          <ColumnButton accentColor="green" icon={FilterBBTIcon} label="Filtros-BBTs" />
+          <ColumnButton accentColor="green" icon={TankIcon} label="Blender" />
           <ColumnButton accentColor="green" icon={Target} label="Precisión Brewing" />
           <ColumnButton accentColor="green" icon={CalendarClock} label="Agenda de Purgas" url="https://craft-brew-insight-137b8.web.app/login" />
+          <ColumnButton accentColor="green" icon={Users} label="Prospectos" />
+          <ColumnButton accentColor="green" icon={FlaskConical} label="Pruebas" />
         </div>
 
         <button className="w-full py-4 mt-auto rounded-xl border border-green-500/30 text-green-500 font-semibold text-sm hover:bg-green-500/10 hover:border-green-500/60 flex items-center justify-center gap-2 transition-all duration-300 shadow-[0_0_10px_rgba(34,197,94,0.1)] hover:shadow-[0_0_15px_rgba(34,197,94,0.2)]">
@@ -69,7 +75,8 @@ export function DashboardColumns() {
           <ColumnButton accentColor="blue" icon={ClipboardList} label="ATO" />
           <ColumnButton accentColor="blue" icon={Gauge} label="Efectividad-Eficiencia" />
           <ColumnButton accentColor="blue" icon={GrafanaIcon} label="Grafana" />
-          <ColumnButton accentColor="blue" icon={PenTool} label="Talleres de Mantenimiento" />
+          <ColumnButton accentColor="blue" icon={Wrench} label="Talleres de Mantenimiento" />
+          <ColumnButton accentColor="blue" icon={DollarSign} label="Costos" />
         </div>
 
         <button className="w-full py-4 mt-auto rounded-xl border border-blue-500/30 text-blue-500 font-semibold text-sm hover:bg-blue-500/10 hover:border-blue-500/60 flex items-center justify-center gap-2 transition-all duration-300 shadow-[0_0_10px_rgba(59,130,246,0.1)] hover:shadow-[0_0_15px_rgba(59,130,246,0.2)]">
@@ -99,12 +106,16 @@ export function DashboardColumns() {
           <ColumnButton accentColor="teal" icon={(props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center"><Shield className="w-4 h-4" /></div>} label="Guardia" url={getUrl("guardian")} />
           <ColumnButton accentColor="teal" icon={MessageSquare} label="Interaction Log" url={getUrl("interaction")} />
           <ColumnButton accentColor="teal" icon={(props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center font-bold">A</div>} label="Acadia" url={getUrl("acadia")} />
-          <ColumnButton accentColor="teal" icon={(props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center font-bold">S</div>} label="Dashboard Autonomía" url={getUrl("autonomía")} />
+          <ColumnButton accentColor="teal" icon={(props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center font-bold text-xs">SP</div>} label="Splan" url={getUrl("splan")} />
+          <ColumnButton accentColor="teal" icon={(props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center font-bold text-xs">AU</div>} label="Autonomía" url={getUrl("autonomía")} />
           <ColumnButton accentColor="teal" icon={Hexagon} label="Core" />
           <ColumnButton accentColor="teal" icon={(props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center"></div>} label="Suite 360" />
           <ColumnButton accentColor="teal" icon={BarChart2} label="Brewinsights" url={getUrl("insights")} />
           <ColumnButton accentColor="teal" icon={GrafanaIcon} label="Grafana" />
           <ColumnButton accentColor="teal" icon={SorbaIcon} label="Sorba" />
+          <ColumnButton accentColor="teal" icon={Layers} label="FMS" />
+          <ColumnButton accentColor="teal" icon={ListChecks} label="GOPs" />
+          <ColumnButton accentColor="teal" icon={Map} label="Safety Map" url="https://safety-map-907c2.web.app" />
         </div>
         
         <div className="w-full flex justify-center pb-2">
