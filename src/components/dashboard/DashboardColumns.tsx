@@ -103,7 +103,7 @@ export function DashboardColumns() {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-4 flex-1">
-          <ColumnButton accentColor="teal" icon={(props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center"><Shield className="w-4 h-4" /></div>} label="Guardia" url={getUrl("guardian")} />
+          <ColumnButton accentColor="teal" icon={(props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center"><Shield className="w-4 h-4" /></div>} label="GUARDIAN" url={getUrl("guardian")} />
           <ColumnButton accentColor="teal" icon={MessageSquare} label="Interaction Log" url={getUrl("interaction")} />
           <ColumnButton accentColor="teal" icon={(props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center font-bold">A</div>} label="Acadia" url={getUrl("acadia")} />
           <ColumnButton accentColor="teal" icon={(props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center font-bold text-xs">SP</div>} label="Splan" url={getUrl("splan")} />
@@ -115,7 +115,7 @@ export function DashboardColumns() {
           <ColumnButton accentColor="teal" icon={SorbaIcon} label="Sorba" />
           <ColumnButton accentColor="teal" icon={Layers} label="FMS" />
           <ColumnButton accentColor="teal" icon={ListChecks} label="GOPs" />
-          <ColumnButton accentColor="teal" icon={Map} label="Safety Map" url="https://safety-map-907c2.web.app" />
+          <ColumnButton accentColor="teal" icon={Map} label="PRO ONE VIEW" url="https://safety-map-907c2.web.app" />
         </div>
         
         <div className="w-full flex justify-center pb-2">
