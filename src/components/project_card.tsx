@@ -1,3 +1,7 @@
+/**
+ * @file project_card.tsx
+ * @description Componente de tarjeta para visualizar de forma atractiva la información de un proyecto.
+ */
 import { ExternalLink, Star } from "lucide-react";
 import type { Project } from "@/types/Project";
 import { useRef } from "react";
@@ -12,7 +16,21 @@ const techStyles: Record<string, string> = {
 
 const defaultTech = "bg-white/5 text-zinc-300 border-white/10";
 
-// Componente de tarjeta para visualizar de forma atractiva la información de un proyecto
+/**
+ * Propiedades para el componente ProjectCard.
+ * @interface ProjectCardProps
+ * @property {Project} project - Datos del proyecto a renderizar.
+ * @property {number} [index] - Índice de la tarjeta en la lista (usado para animación de entrada escalonada).
+ * @property {boolean} [isFavorite] - Indica si el proyecto está marcado como favorito actualmente.
+ * @property {() => void} [onToggleFavorite] - Función que se ejecuta al hacer clic en el botón de favorito.
+ */
+
+/**
+ * Componente de tarjeta para visualizar de forma atractiva la información de un proyecto.
+ * 
+ * @param {ProjectCardProps} props - Propiedades del componente.
+ * @returns {JSX.Element} El elemento interactivo de la tarjeta de proyecto.
+ */
 export function ProjectCard({
   project,
   index = 0,

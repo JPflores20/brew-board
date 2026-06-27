@@ -1,4 +1,12 @@
-// Objeto que contiene las constantes globales de la aplicación
+/**
+ * @file appConstants.ts
+ * @description Archivo que define y exporta las constantes globales utilizadas a lo largo
+ * de toda la aplicación, tales como claves de almacenamiento local y configuraciones de formato.
+ */
+
+/**
+ * Objeto que contiene las constantes globales de la aplicación.
+ */
 export const APP_CONSTANTS = {
   // Clave utilizada para guardar los favoritos en el almacenamiento local (localStorage)
   LOCAL_STORAGE_FAVORITES_KEY: "brew-board-favorites",

@@ -1,7 +1,15 @@
+/**
+ * @file useFavorites.ts
+ * @description Módulo que contiene el hook para gestionar los enlaces y tarjetas 
+ * favoritas del usuario, persistiéndolas en el almacenamiento local.
+ */
 import { useState, useEffect } from "react";
 import { APP_CONSTANTS } from "@/constants/appConstants";
 
-// Hook personalizado para gestionar los enlaces favoritos usando el almacenamiento local
+/**
+ * Hook personalizado para gestionar los enlaces favoritos usando el almacenamiento local.
+ * @returns Objeto con la lista de favoritos y una función para alternar su estado.
+ */
 export function useFavorites() {
   // Estado para guardar la lista de URLs marcadas como favoritas
   const [favorites, setFavorites] = useState<string[]>([]);
@@ -20,7 +28,11 @@ export function useFavorites() {
     }
   }, []);
 
-  // Función para agregar o quitar una URL de la lista de favoritos
+  /**
+   * Función para agregar o quitar una URL de la lista de favoritos.
+   * Si la URL ya existe, la elimina; de lo contrario, la agrega.
+   * @param url - La URL o identificador a añadir o quitar de los favoritos.
+   */
   const toggleFavorite = (url: string) => {
     setFavorites((previousFavorites) => {
       // Verificamos si la URL ya está en los favoritos
@@ -41,7 +53,7 @@ export function useFavorites() {
         JSON.stringify(newFavorites)
       );
       
-      // Devolvemos el nuevo estado
+      // Devolvemos el nuevo estado para actualizar react
       return newFavorites;
     });
   };

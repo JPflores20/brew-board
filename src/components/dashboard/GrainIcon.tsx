@@ -1,5 +1,15 @@
+/**
+ * @file GrainIcon.tsx
+ * @description Componente de icono SVG para representar un grano o espiga.
+ */
 import React from 'react';
 
+/**
+ * Componente funcional que renderiza un icono de grano/espiga en SVG.
+ * 
+ * @param {React.SVGProps<SVGSVGElement>} props - Propiedades estándar de un elemento SVG en React.
+ * @returns {JSX.Element} El elemento SVG del icono de grano.
+ */
 export const GrainIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     {...props}

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview Catálogo estático de proyectos del panel de control.
+ * Este módulo almacena la lista de aplicaciones (Brew Insights, SAP, etc.)
+ * junto con sus metadatos (descripción, tecnologías, URLs e iconos).
+ */
 import {
   Database,
   Cog,
@@ -10,8 +15,13 @@ import {
 } from "lucide-react";
 import type { Project } from "@/types/Project";
 
-// Lista de proyectos disponibles en el panel de control.
-// Contiene la información estática de cada proyecto como su nombre, descripción, tecnologías, URL e ícono a mostrar.
+/**
+ * @const projects
+ * @description Lista de proyectos disponibles en el panel de control.
+ * Contiene la información estática de cada proyecto como su nombre, descripción,
+ * tecnologías, URL de destino e ícono de lucide-react.
+ * @type {Project[]}
+ */
 export const projects: Project[] = [
   {
     name: "Brew Insights",

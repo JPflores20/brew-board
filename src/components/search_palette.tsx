@@ -1,3 +1,7 @@
+/**
+ * @file search_palette.tsx
+ * @description Componente para manejar la paleta de comandos (Command Palette) de búsqueda rápida.
+ */
 import { useEffect, useState } from "react";
 import {
   CommandDialog,
@@ -10,7 +14,12 @@ import {
 import { projects } from "@/lib/projects_data";
 import { Search } from "lucide-react";
 
-// Componente para manejar la paleta de comandos (Command Palette) de búsqueda rápida
+/**
+ * Componente para manejar la paleta de comandos (Command Palette) de búsqueda rápida.
+ * Permite buscar proyectos usando un atajo de teclado (Ctrl/Cmd + K) o mediante un botón interactivo.
+ * 
+ * @returns {JSX.Element} El botón y el diálogo modal de búsqueda.
+ */
 export function SearchPalette() {
   // Estado que controla si el diálogo de búsqueda está abierto o cerrado
   const [open, setOpen] = useState(false);

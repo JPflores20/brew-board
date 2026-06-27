@@ -1,5 +1,15 @@
+/**
+ * @file GrafanaIcon.tsx
+ * @description Componente de icono SVG para representar el logo de Grafana.
+ */
 import React from 'react';
 
+/**
+ * Componente funcional que renderiza el icono de Grafana.
+ * 
+ * @param {React.SVGProps<SVGSVGElement>} props - Propiedades estándar de un elemento SVG en React.
+ * @returns {JSX.Element} El elemento SVG del icono de Grafana.
+ */
 export const GrafanaIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     {...props}

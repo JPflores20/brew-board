@@ -1,5 +1,12 @@
 import React from 'react';
 
+/**
+ * Componente SVG que dibuja un ícono representativo de los filtros BBT (Bright Beer Tanks).
+ * Se utiliza para las tarjetas y botones del dashboard relacionados con los procesos de filtrado.
+ *
+ * @param {React.SVGProps<SVGSVGElement>} props - Propiedades estándar de un elemento SVG de React.
+ * @returns {JSX.Element} El ícono SVG de los tanques de filtrado.
+ */
 export const FilterBBTIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     {...props}

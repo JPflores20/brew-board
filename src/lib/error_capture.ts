@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Módulo para capturar errores globales en memoria.
+ * Útil para recuperar la pila de llamadas (stack) real de un error antes de que sea procesado
+ * o absorbido por frameworks subyacentes, permitiendo un reporte o registro más detallado.
+ */
+
 // Captura el Error original de forma externa (out-of-band) para que server.ts pueda
 // recuperar la pila de llamadas (stack) cuando h3 ya ha absorbido el error lanzando
 // una respuesta genérica 500.
@@ -6,7 +12,10 @@ let lastCapturedError: { error: unknown; at: number } | undefined;
 // Tiempo de vida máximo del error capturado en milisegundos
 const TTL_MS = 5_000;
 
-// Función para registrar el error junto con la marca de tiempo actual
+/**
+ * Registra un error junto con la marca de tiempo actual para una posible recuperación posterior.
+ * @param {unknown} error - El error que ha sido lanzado y capturado.
+ */
 function record(error: unknown) {
   lastCapturedError = { error, at: Date.now() };
 }
@@ -22,7 +31,12 @@ if (typeof globalThis.addEventListener === "function") {
   );
 }
 
-// Función para consumir el último error capturado y limpiarlo de la memoria
+/**
+ * Función para consumir el último error capturado. 
+ * Una vez consumido, el error es eliminado de la memoria. Si el tiempo de vida (TTL) ha expirado,
+ * el error se descarta automáticamente sin retornarlo.
+ * @returns {unknown} El error original capturado, o undefined si no hay ninguno reciente.
+ */
 export function consumeLastCapturedError(): unknown {
   if (!lastCapturedError) return undefined;
   

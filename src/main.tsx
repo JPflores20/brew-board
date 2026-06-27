@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Punto de entrada principal de la aplicación cliente en React.
+ * Inicializa el enrutador y adjunta la jerarquía de componentes al DOM principal.
+ */
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "@tanstack/react-router";

@@ -1,4 +1,14 @@
-// Función que devuelve un HTML básico para mostrar una página de error amigable al usuario
+/**
+ * @fileoverview Proveedor de la plantilla de error HTML estática.
+ * Este módulo contiene la lógica para renderizar una página de error amigable
+ * que se muestra al usuario si la aplicación falla al cargar o sufre un error no recuperable.
+ */
+
+/**
+ * Función que devuelve un documento HTML básico para la página de error.
+ * Presenta un mensaje de fallo genérico y botones para recargar o ir al inicio.
+ * @returns {string} El contenido HTML completo de la página de error.
+ */
 export function renderErrorPage(): string {
   // Se retorna una cadena de texto con la estructura HTML de la página
   return `<!doctype html>

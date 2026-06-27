@@ -1,6 +1,13 @@
+/**
+ * @file useThemeManager.ts
+ * @description Hook para administrar y alternar el tema visual (claro/oscuro) de la aplicación.
+ */
 import { useState, useEffect } from "react";
 
-// Hook personalizado para administrar el tema claro/oscuro de la aplicación
+/**
+ * Hook personalizado para administrar el tema claro/oscuro de la aplicación.
+ * @returns Objeto con un indicador booleano del tema actual y una función para alternarlo.
+ */
 export function useThemeManager() {
   // Estado para saber si el tema actual es oscuro
   const [isDark, setIsDark] = useState(true);
@@ -14,11 +21,14 @@ export function useThemeManager() {
     setIsDark(isDarkTheme);
   }, []);
 
-  // Función para alternar el tema entre claro y oscuro
+  /**
+   * Función para alternar el tema entre claro y oscuro.
+   * Modifica las clases del elemento raíz de forma automática.
+   */
   const toggleTheme = () => {
     const rootElement = document.documentElement;
     
-    // Agregamos o quitamos la clase "dark" en el elemento raíz de forma automática
+    // Agregamos o quitamos la clase "dark" en el elemento raíz
     rootElement.classList.toggle("dark");
     
     // Invertimos el estado actual del tema

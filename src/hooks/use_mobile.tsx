@@ -1,9 +1,17 @@
+/**
+ * @file use_mobile.tsx
+ * @description Hook para detectar si el usuario se encuentra utilizando un dispositivo móvil
+ * basándose en el ancho de la pantalla y el evento de redimensionamiento.
+ */
 import * as React from "react";
 
 // Punto de quiebre (en píxeles) para considerar una pantalla como dispositivo móvil
 const MOBILE_BREAKPOINT = 768;
 
-// Hook personalizado para determinar si la ventana actual corresponde a un dispositivo móvil
+/**
+ * Hook personalizado para determinar si la ventana actual corresponde a un dispositivo móvil.
+ * @returns Verdadero (true) si el dispositivo es móvil, falso (false) en caso contrario.
+ */
 export function useIsMobile() {
   // Estado que guarda si es móvil o no. Inicia como undefined para evitar diferencias durante la hidratación (SSR)
   const [isMobile, setIsMobile] = React.useState<boolean | undefined>(undefined);

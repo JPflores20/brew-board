@@ -1,7 +1,15 @@
+/**
+ * @file useClock.ts
+ * @description Módulo que provee un hook para obtener la hora actual en tiempo real
+ * y generar saludos contextuales basados en la hora del día.
+ */
 import { useState, useEffect } from "react";
 import { APP_CONSTANTS } from "@/constants/appConstants";
 
-// Hook personalizado para manejar la hora actual y el saludo según la hora del día
+/**
+ * Hook personalizado para manejar la hora actual y el saludo según la hora del día.
+ * @returns Objeto con el tiempo actual (Date), tiempo formateado (string) y una función para obtener el saludo.
+ */
 export function useClock() {
   // Estado que guarda la fecha y hora actual
   const [time, setTime] = useState(new Date());
@@ -16,7 +24,10 @@ export function useClock() {
     return () => clearInterval(intervalId);
   }, []);
 
-  // Función para determinar el saludo adecuado basado en la hora actual
+  /**
+   * Determina el saludo adecuado basado en la hora actual del sistema.
+   * @returns Un saludo en formato de texto.
+   */
   const getGreeting = () => {
     const hour = time.getHours();
     

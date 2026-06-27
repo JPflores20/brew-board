@@ -1,7 +1,16 @@
+/**
+ * @fileoverview Configuración e inicialización del SDK de Firebase.
+ * Exporta las instancias de los servicios utilizados en la aplicación: app, analytics, auth y db.
+ */
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
-// Configuración del proyecto de Firebase con las credenciales necesarias
+/**
+ * @const firebaseConfig
+ * @description Configuración del proyecto de Firebase con las credenciales necesarias para conectar el cliente.
+ */
 const firebaseConfig = {
   apiKey: "AIzaSyCtD4houtwdnE5TCZhioqHdGNdWxlo5ej8",
   authDomain: "brew-f4449.firebaseapp.com",
@@ -17,3 +26,7 @@ export const app = initializeApp(firebaseConfig);
 
 // Inicializamos Analytics solo si estamos en el entorno del navegador (cliente) para evitar errores en SSR
 export const analytics = typeof window !== "undefined" ? getAnalytics(app) : null;
+
+// Autenticación y base de datos
+export const auth = getAuth(app);
+export const db = getFirestore(app);

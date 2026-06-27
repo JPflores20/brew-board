@@ -1,6 +1,15 @@
+/**
+ * @file not_found_component.tsx
+ * @description Componente de interfaz para manejar el error 404 (Página no encontrada).
+ */
 import { Link } from "@tanstack/react-router";
 
-// Componente que se muestra cuando el usuario intenta acceder a una ruta que no existe (Error 404)
+/**
+ * Componente que se muestra cuando el usuario intenta acceder a una ruta que no existe (Error 404).
+ * Proporciona un mensaje claro y un enlace para regresar a la página principal.
+ * 
+ * @returns {JSX.Element} La vista de página no encontrada.
+ */
 export function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">

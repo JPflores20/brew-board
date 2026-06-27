@@ -1,5 +1,15 @@
+/**
+ * @file SorbaIcon.tsx
+ * @description Componente de icono SVG para representar el logo o concepto de Sorba.
+ */
 import React from 'react';
 
+/**
+ * Componente funcional que renderiza un icono SVG personalizado (Sorba).
+ * 
+ * @param {React.SVGProps<SVGSVGElement>} props - Propiedades estándar de un elemento SVG en React.
+ * @returns {JSX.Element} El elemento SVG del icono de Sorba.
+ */
 export const SorbaIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     {...props}

@@ -1,8 +1,17 @@
+/**
+ * @file ProjectGrid.tsx
+ * @description Grid de proyectos que muestra todas las tarjetas de proyectos disponibles, ordenadas por favoritos.
+ */
 import { ProjectCard } from "@/components/project_card";
 import { projects } from "@/lib/projects_data";
 import { useFavorites } from "@/hooks/useFavorites";
 
-// Componente que organiza y renderiza la lista completa de proyectos de la interfaz en forma de cuadrícula
+/**
+ * Componente que organiza y renderiza la lista completa de proyectos de la interfaz en forma de cuadrícula.
+ * Prioriza en la visualización a aquellos proyectos marcados como favoritos.
+ * 
+ * @returns {JSX.Element} Grid de tarjetas de proyectos.
+ */
 export function ProjectGrid() {
   // Extraemos la lista de URLs favoritas y la función de alternar desde nuestro hook
   const { favorites, toggleFavorite } = useFavorites();

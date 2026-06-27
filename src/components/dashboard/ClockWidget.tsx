@@ -2,7 +2,13 @@ import { Clock } from "lucide-react";
 import { useClock } from "@/hooks/useClock";
 import { useEffect, useState } from "react";
 
-// Componente visual que muestra la hora actual en tiempo real
+/**
+ * Componente visual que muestra la hora actual en tiempo real.
+ * Utiliza el hook personalizado `useClock` para obtener la hora y maneja
+ * el estado de montaje para evitar errores de hidratación durante el SSR.
+ *
+ * @returns {JSX.Element} Un widget con un icono de reloj y la hora formateada.
+ */
 export function ClockWidget() {
   // Obtenemos la hora formateada desde el hook personalizado
   const { formattedTime } = useClock();

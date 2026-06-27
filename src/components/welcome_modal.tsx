@@ -1,3 +1,7 @@
+/**
+ * @file welcome_modal.tsx
+ * @description Componente Modal que se muestra a los usuarios nuevos para introducirles las herramientas de la plataforma.
+ */
 import { useState, useEffect } from "react";
 import {
   Dialog,
@@ -11,7 +15,12 @@ import { Button } from "@/components/ui/button";
 import { Search, Star, Moon, Rocket } from "lucide-react";
 import { APP_CONSTANTS } from "@/constants/appConstants";
 
-// Componente Modal que se muestra a los usuarios nuevos para introducirles las herramientas de la plataforma
+/**
+ * Componente Modal de bienvenida.
+ * Se muestra una vez por usuario basándose en localStorage para explicar las características clave del sistema.
+ * 
+ * @returns {JSX.Element} El modal de bienvenida.
+ */
 export function WelcomeModal() {
   // Estado local para manejar la apertura o cierre del modal
   const [isOpen, setIsOpen] = useState(false);

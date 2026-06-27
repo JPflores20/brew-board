@@ -1,6 +1,11 @@
 import { APP_CONSTANTS } from "@/constants/appConstants";
 
-// Componente que renderiza los efectos visuales de fondo de la aplicación
+/**
+ * Componente que renderiza los efectos visuales de fondo de la aplicación.
+ * Proporciona una malla geométrica, esferas flotantes animadas y textura de ruido para dar estilo.
+ *
+ * @returns {JSX.Element} El contenedor principal con los elementos visuales de fondo.
+ */
 export function BackgroundEffects() {
   return (
     <div

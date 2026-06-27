@@ -1,18 +1,24 @@
+/**
+ * @file Project.ts
+ * @description Definición de tipos e interfaces para los proyectos de la aplicación.
+ */
 import { type LucideIcon } from "lucide-react";
 
-// Interfaz que define la estructura de datos para un Proyecto.
-// Garantiza el tipado estricto en la lista de proyectos y componentes.
+/**
+ * Interfaz que define la estructura de datos para un Proyecto.
+ * Garantiza el tipado estricto en la lista de proyectos y componentes.
+ */
 export interface Project {
-  // Nombre del proyecto
+  /** Nombre del proyecto */
   name: string;
-  // Descripción detallada de la función principal del proyecto
+  /** Descripción detallada de la función principal del proyecto */
   description: string;
-  // Lema o eslogan opcional del proyecto
+  /** Lema o eslogan opcional del proyecto */
   tagline?: string;
-  // Lista de tecnologías o entorno bajo el cual opera el proyecto
+  /** Lista de tecnologías o entorno bajo el cual opera el proyecto */
   stack: string[];
-  // URL o enlace directo hacia la plataforma del proyecto
+  /** URL o enlace directo hacia la plataforma del proyecto */
   url: string;
-  // Ícono de lucide-react para representarlo gráficamente
+  /** Ícono de lucide-react para representarlo gráficamente */
   icon: LucideIcon;
 }

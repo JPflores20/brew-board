@@ -1,6 +1,22 @@
+/**
+ * @file error_component.tsx
+ * @description Componente de interfaz para mostrar un mensaje amigable cuando ocurre un error de renderizado o enrutamiento.
+ */
 import { useRouter } from "@tanstack/react-router";
 
-// Componente genérico para mostrar cuando ocurre un error inesperado en la aplicación o ruta
+/**
+ * Propiedades para ErrorComponent.
+ * @interface ErrorComponentProps
+ * @property {Error} error - El objeto de error capturado.
+ * @property {() => void} reset - Función para reiniciar el estado de error e intentar de nuevo.
+ */
+
+/**
+ * Componente genérico para mostrar cuando ocurre un error inesperado en la aplicación o ruta.
+ * 
+ * @param {ErrorComponentProps} props - Propiedades del componente de error.
+ * @returns {JSX.Element} La vista de error.
+ */
 export function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   // Registramos el error en la consola para facilitar la depuración
   console.error(error);
