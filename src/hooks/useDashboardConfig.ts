@@ -28,9 +28,10 @@ const DEFAULTS: Record<string, CardConfig[]> = {
   procesos: [
     { id: "higiene", label: "Higiene" },
     { id: "materias-primas", label: "Materias Primas" },
-    { id: "boc", label: "B.O.C (Breawing Operator Control)", url: "https://breawing-operator-control.web.app/" },
+    { id: "cocimientos", label: "COCIMIENTOS" },
     { id: "tccs", label: "TCCs" },
-    { id: "filtros-bbts", label: "Filtros-BBTs" },
+    { id: "filtros", label: "Filtros" },
+    { id: "bbts", label: "BBT's" },
     { id: "blender", label: "Blender" },
     { id: "precision-brewing", label: "Precisión Brewing" },
     { id: "agenda-purgas", label: "Agenda de Purgas", url: "https://craft-brew-insight-137b8.web.app/login" },
@@ -42,7 +43,6 @@ const DEFAULTS: Record<string, CardConfig[]> = {
     { id: "capacidades", label: "Capacidades" },
     { id: "ato", label: "ATO" },
     { id: "efectividad", label: "Efectividad-Eficiencia" },
-    { id: "grafana-mant", label: "Grafana" },
     { id: "talleres", label: "Talleres de Mantenimiento" },
     { id: "costos", label: "Costos" },
   ],
@@ -50,10 +50,10 @@ const DEFAULTS: Record<string, CardConfig[]> = {
     { id: "guardian", label: "GUARDIAN", url: "https://guardian.ab-inbev.com/home" },
     { id: "interaction-log", label: "Interaction Log", url: "https://supplyportal.ab-inbev.com/login/sso_login.asp" },
     { id: "acadia", label: "Acadia", url: "https://ab-inbev.acadia.sysalli.com/browse/" },
-    { id: "splan", label: "Splan" },
+    { id: "splan", label: "Splan", url: "https://abinbevww.service-now.com/abiex?id=sc_cat_item_abi&sys_id=18a2cecedb9ad0d0faa711494b96197a" },
     { id: "autonomia", label: "Autonomía", url: "https://preview-bbe71.web.app/" },
-    { id: "core", label: "Core" },
-    { id: "suite360", label: "Suite 360" },
+    { id: "core", label: "Core", url: "http://oneazrap1932.one.ofc.loc/TS" },
+    { id: "suite360", label: "Suite 360", url: "https://abinbev.optiplan.co/" },
     { id: "brewinsights", label: "Brewinsights", url: "https://brew-insights.web.app/login" },
     { id: "grafana-vpo", label: "Grafana" },
     { id: "sorba", label: "Sorba" },
@@ -61,6 +61,10 @@ const DEFAULTS: Record<string, CardConfig[]> = {
     { id: "gops", label: "GOPs" },
     { id: "pro-one-view", label: "PRO ONE VIEW", url: "https://safety-map-907c2.web.app" },
     { id: "sap", label: "SAP", url: "https://azuevp04.modelo.gmodelo.com.mx/irj/portal?NavigationTarget=navurl://334834ed11204abf6f9fb249edec621b&NavMode=10&sap-ie=EDGE" },
+    { id: "boc", label: "B.O.C (Breawing Operator Control)", url: "https://breawing-operator-control.web.app/" },
+    { id: "pilares", label: "PILARES", url: "https://anheuserbuschinbev.sharepoint.com/:f:/r/sites/MAZ3/bo/Fbrica%20Zacatecas/ELABORACI%C3%93N?csf=1&web=1&e=LvJUdD" },
+    { id: "etos", label: "ETOS" },
+    { id: "pml-cleanpro", label: "PML CleanPro", url: "https://pml-cleanpro.web.app/" },
   ],
 };
 
@@ -82,11 +86,16 @@ export function useDashboardConfig(panel: "procesos" | "mantenimiento" | "vpo") 
       if (snap.exists()) {
         const data = snap.data();
         if (data?.cards && Array.isArray(data.cards)) {
-          // Asegurar que las tarjetas nuevas (como SAP) se agreguen a las configuraciones existentes
-          // para no perder elementos agregados recientemente en DEFAULTS
-          const existingIds = new Set(data.cards.map(c => c.id));
+          // Asegurar que las tarjetas nuevas se agreguen y las eliminadas (como grafana-mant) se quiten
+          const defaultIds = new Set(DEFAULTS[panel].map(c => c.id));
+          const defaultMap = new Map(DEFAULTS[panel].map(c => [c.id, c]));
+          const filteredCards = data.cards.filter(c => defaultIds.has(c.id)).map((c: any) => ({
+            ...c,
+            url: c.url || defaultMap.get(c.id)?.url
+          }));
+          const existingIds = new Set(filteredCards.map((c: any) => c.id));
           const missingCards = DEFAULTS[panel].filter(c => !existingIds.has(c.id));
-          setCards([...data.cards, ...missingCards]);
+          setCards([...filteredCards, ...missingCards]);
         }
       }
       setLoading(false);

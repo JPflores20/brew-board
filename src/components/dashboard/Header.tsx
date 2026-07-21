@@ -41,13 +41,19 @@ export function Header({ editMode, onEditModeChange }: HeaderProps) {
 
   // Guardar los cambios realizados en el modo de edición
   const handleSave = async () => {
-    setSaving(true);
-    try {
-      await (window as any).__dashboardSave?.();
-    } finally {
-      setSaving(false);
-      onEditModeChange(false);
-    }
+    // Forzar el guardado de cualquier popover que siga abierto
+    window.dispatchEvent(new CustomEvent('commit-all-edits'));
+
+    // Pequeña pausa para permitir que el estado de React se actualice
+    setTimeout(async () => {
+      setSaving(true);
+      try {
+        await (window as any).__dashboardSave?.();
+      } finally {
+        setSaving(false);
+        onEditModeChange(false);
+      }
+    }, 50);
   };
 
   // Cancelar los cambios de edición y salir del modo de edición
@@ -73,8 +79,8 @@ export function Header({ editMode, onEditModeChange }: HeaderProps) {
             className="h-20 w-20 rounded-full object-cover shadow-[0_0_20px_rgba(250,204,21,0.2)] ring-1 ring-yellow-500/40"
           />
           <div className="flex flex-col items-center text-center">
-            <h1 className="text-2xl md:text-[28px] font-bold tracking-widest text-zinc-100 uppercase leading-none mb-1.5">
-              PRP ONE VIEW
+            <h1 className="text-2xl md:text-[28px] font-bold tracking-widest text-zinc-100 leading-none mb-1.5">
+              Gestión Cervecera
             </h1>
             <p className="text-[10px] md:text-xs text-yellow-500 font-semibold tracking-[0.25em] uppercase">
               Control • Eficiencia • Calidad

@@ -50,16 +50,31 @@ export function ColumnButton({
     }
   }, [editMode, label, url]);
 
-  // Escuchar eventos globales para cerrar otros menús de edición si se abre uno nuevo
+  // Escuchar eventos globales para cerrar otros menús o forzar el guardado
   useEffect(() => {
     const handleCloseOthers = () => {
       setEditing(false);
       setTempLabel(label);
       setTempUrl(url || "");
     };
+
+    const handleCommitAll = () => {
+      if (editing) {
+        setEditing(false);
+        const finalLabel = tempLabel.trim() || label;
+        const finalUrl = tempUrl.trim();
+        onEdit?.(finalLabel, finalUrl);
+      }
+    };
+
     window.addEventListener('close-other-edits', handleCloseOthers);
-    return () => window.removeEventListener('close-other-edits', handleCloseOthers);
-  }, [label, url]);
+    window.addEventListener('commit-all-edits', handleCommitAll);
+    
+    return () => {
+      window.removeEventListener('close-other-edits', handleCloseOthers);
+      window.removeEventListener('commit-all-edits', handleCommitAll);
+    };
+  }, [label, url, editing, tempLabel, tempUrl, onEdit]);
 
   const colorStyles = {
     green: "hover:border-green-400 hover:bg-green-500/10 hover:shadow-[0_0_15px_rgba(34,197,94,0.4)] text-green-500 [&_svg]:text-green-500",

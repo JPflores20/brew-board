@@ -4,7 +4,7 @@ import {
   Droplet, Leaf, Database, Filter, Target,
   Calendar, BarChart2, ClipboardList, Gauge, Settings, PenTool,
   Shield, MessageSquare, Hexagon, Circle, Cog, CalendarClock,
-  Users, FlaskConical, Layers, ListChecks, DollarSign, Monitor, Wrench, Wheat, Map
+  Users, FlaskConical, Layers, ListChecks, DollarSign, Monitor, Wrench, Wheat, Map, Flame, Landmark, BookOpen
 } from "lucide-react";
 import { GrafanaIcon } from "./GrafanaIcon";
 import { SorbaIcon } from "./SorbaIcon";
@@ -21,7 +21,8 @@ const ICON_MAP: Record<string, React.ElementType | React.ReactNode> = {
   "materias-primas": Wheat,
   "boc": Monitor,
   "tccs": Database,
-  "filtros-bbts": FilterBBTIcon,
+  "filtros": Filter,
+  "bbts": FilterBBTIcon,
   "blender": TankIcon,
   "precision-brewing": Target,
   "agenda-purgas": CalendarClock,
@@ -31,7 +32,7 @@ const ICON_MAP: Record<string, React.ElementType | React.ReactNode> = {
   "capacidades": BarChart2,
   "ato": ClipboardList,
   "efectividad": Gauge,
-  "grafana-mant": GrafanaIcon,
+  "cocimientos": Flame,
   "talleres": Wrench,
   "costos": DollarSign,
   "guardian": (props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center"><Shield className="w-4 h-4" /></div>,
@@ -39,6 +40,8 @@ const ICON_MAP: Record<string, React.ElementType | React.ReactNode> = {
   "acadia": (props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center font-bold">A</div>,
   "splan": (props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center font-bold text-xs">SP</div>,
   "autonomia": (props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center font-bold text-xs">AU</div>,
+  "pilares": Landmark,
+  "etos": BookOpen,
   "core": Hexagon,
   "suite360": (props: any) => <div className="border-2 border-current rounded-full w-7 h-7 flex items-center justify-center"></div>,
   "brewinsights": BarChart2,
@@ -48,6 +51,7 @@ const ICON_MAP: Record<string, React.ElementType | React.ReactNode> = {
   "gops": ListChecks,
   "pro-one-view": Map,
   "sap": "SAP",
+  "pml-cleanpro": Droplet,
 };
 
 /**
@@ -62,6 +66,9 @@ interface PanelProps {
   onReorder: (newCards: CardConfig[]) => void;
   onEditCard: (id: string, newLabel: string, newUrl?: string) => void;
   dashboardButtonLabel: string;
+  dashboardButtonUrl?: string;
+  secondaryButtonLabel?: string;
+  secondaryButtonUrl?: string;
   gridCols?: string;
   footer?: React.ReactNode;
   delay: number;
@@ -76,7 +83,7 @@ interface PanelProps {
  */
 function PanelColumn({
   title, accentColor, headerIcon, cards, editMode,
-  onReorder, onEditCard, dashboardButtonLabel, gridCols = "grid-cols-2 lg:grid-cols-3",
+  onReorder, onEditCard, dashboardButtonLabel, dashboardButtonUrl, secondaryButtonLabel, secondaryButtonUrl, gridCols = "grid-cols-2 lg:grid-cols-3",
   footer, delay
 }: PanelProps) {
   // Referencia al elemento actualmente siendo arrastrado
@@ -190,9 +197,29 @@ function PanelColumn({
 
       {footer}
 
-      <button className={`w-full py-4 mt-auto rounded-xl border font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-300 ${btnStyles}`}>
-        <BarChart2 className="h-5 w-5" /> {dashboardButtonLabel}
-      </button>
+      {secondaryButtonLabel ? (
+        <div className="flex gap-4 mt-auto">
+          <a href={dashboardButtonUrl || "#"} target={dashboardButtonUrl ? "_blank" : "_self"} className={`relative flex-1 py-4 rounded-xl border font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-300 ${btnStyles}`}>
+            <div className="absolute top-2 right-2" title={dashboardButtonUrl ? "Link asignado" : "Sin link asignado"}>
+              <div className={`w-2 h-2 rounded-full ${dashboardButtonUrl ? 'bg-green-500 shadow-[0_0_5px_rgba(34,197,94,0.5)]' : 'bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.5)]'}`} />
+            </div>
+            <BarChart2 className="h-5 w-5" /> {dashboardButtonLabel}
+          </a>
+          <a href={secondaryButtonUrl || "#"} target={secondaryButtonUrl ? "_blank" : "_self"} className={`relative flex-1 py-4 rounded-xl border font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-300 ${btnStyles}`}>
+            <div className="absolute top-2 right-2" title={secondaryButtonUrl ? "Link asignado" : "Sin link asignado"}>
+              <div className={`w-2 h-2 rounded-full ${secondaryButtonUrl ? 'bg-green-500 shadow-[0_0_5px_rgba(34,197,94,0.5)]' : 'bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.5)]'}`} />
+            </div>
+            <BarChart2 className="h-5 w-5" /> {secondaryButtonLabel}
+          </a>
+        </div>
+      ) : (
+        <a href={dashboardButtonUrl || "#"} target={dashboardButtonUrl ? "_blank" : "_self"} className={`relative w-full py-4 mt-auto rounded-xl border font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-300 ${btnStyles}`}>
+          <div className="absolute top-2 right-2" title={dashboardButtonUrl ? "Link asignado" : "Sin link asignado"}>
+            <div className={`w-2 h-2 rounded-full ${dashboardButtonUrl ? 'bg-green-500 shadow-[0_0_5px_rgba(34,197,94,0.5)]' : 'bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.5)]'}`} />
+          </div>
+          <BarChart2 className="h-5 w-5" /> {dashboardButtonLabel}
+        </a>
+      )}
     </motion.div>
   );
 }
@@ -272,7 +299,7 @@ export function DashboardColumns({ editMode }: DashboardColumnsProps) {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-[1400px] mx-auto w-full px-4 pb-12 pt-8 flex-1">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full px-4 pb-12 pt-8 flex-1">
 
       {/* Control de Procesos */}
       <PanelColumn
@@ -289,6 +316,8 @@ export function DashboardColumns({ editMode }: DashboardColumnsProps) {
         onReorder={(c) => handleReorder("procesos", c)}
         onEditCard={(id, lbl, url) => handleEditCard("procesos", id, lbl, url)}
         dashboardButtonLabel="DASHBOARD DE PROCESOS"
+        secondaryButtonLabel="Foro KPI's"
+        secondaryButtonUrl="https://app.powerbi.com/groups/me/reports/9655be36-5ae3-4b74-bf6d-af783ce57db6/3e94e11001e4795e3ce6?ctid=cef04b19-7776-4a94-b89b-375c77a8f936&experience=power-bi"
       />
 
       {/* Mantenimiento */}
@@ -307,6 +336,7 @@ export function DashboardColumns({ editMode }: DashboardColumnsProps) {
         onReorder={(c) => handleReorder("mant", c)}
         onEditCard={(id, lbl, url) => handleEditCard("mant", id, lbl, url)}
         dashboardButtonLabel="DASHBOARD DE MANTENIMIENTO"
+        secondaryButtonLabel="Overhoald"
       />
 
       {/* VPO Digital */}
@@ -326,6 +356,7 @@ export function DashboardColumns({ editMode }: DashboardColumnsProps) {
         onReorder={(c) => handleReorder("vpo", c)}
         onEditCard={(id, lbl, url) => handleEditCard("vpo", id, lbl, url)}
         dashboardButtonLabel="DASHBOARD VPO DIGITAL"
+        secondaryButtonLabel="DASHBOARD VISIBILIDAD VPO"
       />
     </div>
   );
