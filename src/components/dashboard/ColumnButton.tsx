@@ -9,7 +9,7 @@ interface ColumnButtonProps {
   icon: LucideIcon | string | React.ReactNode;
   label: string;
   url?: string;
-  accentColor: 'green' | 'blue' | 'teal';
+  accentColor: 'green' | 'blue' | 'teal' | 'red' | 'sky' | 'zinc' | 'orange' | 'purple' | 'yellow';
   className?: string;
   isWide?: boolean;
   editMode?: boolean;
@@ -76,34 +76,64 @@ export function ColumnButton({
     };
   }, [label, url, editing, tempLabel, tempUrl, onEdit]);
 
-  const colorStyles = {
+  const colorStyles: Record<string, string> = {
     green: "hover:border-green-400 hover:bg-green-500/10 hover:shadow-[0_0_15px_rgba(34,197,94,0.4)] text-green-500 [&_svg]:text-green-500",
     blue: "hover:border-blue-400 hover:bg-blue-500/10 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)] text-blue-500 [&_svg]:text-blue-500",
-    teal: "hover:border-teal-400 hover:bg-teal-500/10 hover:shadow-[0_0_15px_rgba(20,184,166,0.4)] text-teal-500 [&_svg]:text-teal-500"
+    teal: "hover:border-teal-400 hover:bg-teal-500/10 hover:shadow-[0_0_15px_rgba(20,184,166,0.4)] text-teal-500 [&_svg]:text-teal-500",
+    red: "hover:border-red-400 hover:bg-red-500/10 hover:shadow-[0_0_15px_rgba(239,68,68,0.4)] text-red-500 [&_svg]:text-red-500",
+    sky: "hover:border-sky-400 hover:bg-sky-500/10 hover:shadow-[0_0_15px_rgba(14,165,233,0.4)] text-sky-500 [&_svg]:text-sky-500",
+    zinc: "hover:border-zinc-400 hover:bg-zinc-500/10 hover:shadow-[0_0_15px_rgba(161,161,170,0.4)] text-zinc-400 [&_svg]:text-zinc-400",
+    orange: "hover:border-orange-400 hover:bg-orange-500/10 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] text-orange-500 [&_svg]:text-orange-500",
+    purple: "hover:border-purple-400 hover:bg-purple-500/10 hover:shadow-[0_0_15px_rgba(168,85,247,0.4)] text-purple-500 [&_svg]:text-purple-500",
+    yellow: "hover:border-yellow-400 hover:bg-yellow-500/10 hover:shadow-[0_0_15px_rgba(234,179,8,0.4)] text-yellow-500 [&_svg]:text-yellow-500"
   };
 
-  const popoverBorder = {
+  const popoverBorder: Record<string, string> = {
     green: "border-green-500/60",
     blue: "border-blue-500/60",
     teal: "border-teal-500/60",
+    red: "border-red-500/60",
+    sky: "border-sky-500/60",
+    zinc: "border-zinc-500/60",
+    orange: "border-orange-500/60",
+    purple: "border-purple-500/60",
+    yellow: "border-yellow-500/60",
   };
 
-  const inputFocus = {
+  const inputFocus: Record<string, string> = {
     green: "focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50",
     blue: "focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/50",
     teal: "focus:border-teal-500/50 focus:ring-1 focus:ring-teal-500/50",
+    red: "focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50",
+    sky: "focus:border-sky-500/50 focus:ring-1 focus:ring-sky-500/50",
+    zinc: "focus:border-zinc-500/50 focus:ring-1 focus:ring-zinc-500/50",
+    orange: "focus:border-orange-500/50 focus:ring-1 focus:ring-orange-500/50",
+    purple: "focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/50",
+    yellow: "focus:border-yellow-500/50 focus:ring-1 focus:ring-yellow-500/50",
   };
 
-  const saveBtn = {
+  const saveBtn: Record<string, string> = {
     green: "bg-green-600 hover:bg-green-500 shadow-green-900/50",
     blue: "bg-blue-600 hover:bg-blue-500 shadow-blue-900/50",
     teal: "bg-teal-600 hover:bg-teal-500 shadow-teal-900/50",
+    red: "bg-red-600 hover:bg-red-500 shadow-red-900/50",
+    sky: "bg-sky-600 hover:bg-sky-500 shadow-sky-900/50",
+    zinc: "bg-zinc-600 hover:bg-zinc-500 shadow-zinc-900/50",
+    orange: "bg-orange-600 hover:bg-orange-500 shadow-orange-900/50",
+    purple: "bg-purple-600 hover:bg-purple-500 shadow-purple-900/50",
+    yellow: "bg-yellow-600 hover:bg-yellow-500 shadow-yellow-900/50",
   };
 
   const editBorderStyles: Record<string, string> = {
     green: "border-green-500/50 border-dashed",
     blue: "border-blue-500/50 border-dashed",
     teal: "border-teal-500/50 border-dashed",
+    red: "border-red-500/50 border-dashed",
+    sky: "border-sky-500/50 border-dashed",
+    zinc: "border-zinc-500/50 border-dashed",
+    orange: "border-orange-500/50 border-dashed",
+    purple: "border-purple-500/50 border-dashed",
+    yellow: "border-yellow-500/50 border-dashed",
   };
 
   const borderStyles = editMode
@@ -165,20 +195,20 @@ export function ColumnButton({
         <div className={`w-2 h-2 rounded-full ${url ? 'bg-green-500 shadow-[0_0_5px_rgba(34,197,94,0.5)]' : 'bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.5)]'}`} />
       </div>
 
-      <div className={`${isWide ? 'px-4' : 'h-[42px] w-[42px]'} flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 drop-shadow-md group-hover:drop-shadow-[0_0_8px_currentColor]`}>
+      <div className={`${isWide ? 'px-2' : 'h-[32px] w-[32px] md:h-[36px] md:w-[36px]'} flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3 drop-shadow-md group-hover:drop-shadow-[0_0_8px_currentColor]`}>
         {typeof icon === 'string' ? (
-          <span className="text-2xl font-bold font-sans tracking-tighter">{icon}</span>
+          <span className="text-xl md:text-2xl font-bold font-sans tracking-tighter">{icon}</span>
         ) : React.isValidElement(icon) ? (
           icon
         ) : (
-          React.createElement(icon as React.ElementType, { className: "h-[31px] w-[31px]", strokeWidth: 1.5 })
+          React.createElement(icon as React.ElementType, { className: "h-[20px] w-[20px] md:h-[24px] md:w-[24px]", strokeWidth: 1.5 })
         )}
       </div>
 
       {/* Normal Label */}
       {!isWide && label && (
         <span
-          className={`text-[10px] md:text-xs font-semibold uppercase tracking-wider ${editMode ? "text-zinc-200 underline decoration-dashed decoration-zinc-600 underline-offset-2" : "text-zinc-300"}`}
+          className={`text-[8.5px] md:text-[9.5px] leading-tight font-semibold uppercase tracking-wider ${editMode ? "text-zinc-200 underline decoration-dashed decoration-zinc-600 underline-offset-2" : "text-zinc-300"}`}
           title={editMode ? "Doble clic para editar" : undefined}
         >
           {label}
@@ -229,7 +259,7 @@ export function ColumnButton({
   if (editMode) {
     return (
       <div
-        className={`relative flex flex-col items-center justify-center p-3 gap-2 text-center ${borderStyles} ${baseHover} ${colorStyles[accentColor]} ${className}`}
+        className={`relative flex flex-col items-center justify-center p-2 gap-1 md:gap-1.5 text-center ${borderStyles} ${baseHover} ${colorStyles[accentColor]} ${className}`}
         draggable={draggable}
         onDragStart={onDragStart}
         onDragEnter={onDragEnter}
@@ -248,7 +278,7 @@ export function ColumnButton({
       href={url || "#"}
       target={url ? "_blank" : "_self"}
       rel={url ? "noopener noreferrer" : ""}
-      className={`relative flex flex-col items-center justify-center p-3 gap-2 text-center ${borderStyles} ${baseHover} ${colorStyles[accentColor]} ${className}`}
+      className={`relative flex flex-col items-center justify-center p-2 gap-1 md:gap-1.5 text-center ${borderStyles} ${baseHover} ${colorStyles[accentColor]} ${className}`}
     >
       {content}
     </a>

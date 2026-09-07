@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Settings } from "lucide-react";
+import { Settings, Search } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { LoginModal } from "./LoginModal";
 import { EditModeControls } from "./EditModeControls";
@@ -10,6 +10,8 @@ import { EditModeControls } from "./EditModeControls";
 interface HeaderProps {
   editMode: boolean;
   onEditModeChange: (active: boolean) => void;
+  searchQuery?: string;
+  onSearchChange?: (query: string) => void;
 }
 
 /**
@@ -20,7 +22,7 @@ interface HeaderProps {
  * @param {HeaderProps} props - Propiedades del header.
  * @returns {JSX.Element} El componente de cabecera con sus modales y controles de edición.
  */
-export function Header({ editMode, onEditModeChange }: HeaderProps) {
+export function Header({ editMode, onEditModeChange, searchQuery, onSearchChange }: HeaderProps) {
   const { user, signOut } = useAuth();
   const [showLogin, setShowLogin] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -70,7 +72,7 @@ export function Header({ editMode, onEditModeChange }: HeaderProps) {
 
   return (
     <>
-      <header className="w-full flex justify-center items-center px-6 md:px-12 py-8 relative">
+      <header className="w-full flex flex-col md:flex-row justify-center items-center px-6 md:px-12 py-8 relative">
         {/* Centered: Logo & Titles stacked */}
         <div className="flex flex-col items-center gap-3">
           <img
@@ -80,13 +82,49 @@ export function Header({ editMode, onEditModeChange }: HeaderProps) {
           />
           <div className="flex flex-col items-center text-center">
             <h1 className="text-2xl md:text-[28px] font-bold tracking-widest text-zinc-100 leading-none mb-1.5">
-              Gestión Cervecera
+              VPO DIGITAL
             </h1>
             <p className="text-[10px] md:text-xs text-yellow-500 font-semibold tracking-[0.25em] uppercase">
-              Control • Eficiencia • Calidad
+              Liderazgo, metodología, conocimiento
             </p>
           </div>
         </div>
+
+        {/* Barra de Búsqueda desplazada a la derecha */}
+        {onSearchChange && (
+          <div className="hidden md:block absolute right-24 md:right-32 w-64 lg:w-80 bottom-8">
+            <div className="relative w-full">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Search className="h-4 w-4 text-zinc-400" />
+              </div>
+              <input
+                type="text"
+                placeholder="Buscar aplicación..."
+                value={searchQuery || ""}
+                onChange={(e) => onSearchChange(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 bg-[#0a192f]/80 border border-white/10 rounded-xl text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:border-yellow-500/50 focus:ring-yellow-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)]"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Para móviles, la mostramos debajo */}
+        {onSearchChange && (
+          <div className="md:hidden w-full mt-6 px-4">
+            <div className="relative w-full">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <Search className="h-4 w-4 text-zinc-400" />
+              </div>
+              <input
+                type="text"
+                placeholder="Buscar aplicación..."
+                value={searchQuery || ""}
+                onChange={(e) => onSearchChange(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 bg-[#0a192f]/80 border border-white/10 rounded-xl text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-1 focus:border-yellow-500/50 focus:ring-yellow-500/30 transition-all duration-300 shadow-[0_0_15px_rgba(0,0,0,0.5)]"
+              />
+            </div>
+          </div>
+        )}
 
         {/* Gear icon — top right */}
         <button

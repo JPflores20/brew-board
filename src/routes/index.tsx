@@ -42,14 +42,23 @@ export const Route = createFileRoute("/")({
  */
 function DashboardIndex() {
   const [editMode, setEditMode] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <div className="flex flex-col min-h-screen bg-[#030910] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#061421] via-[#030910] to-black text-zinc-100 font-sans selection:bg-yellow-500/30 overflow-x-hidden">
       {/* Encabezado con Logo y Menú */}
-      <Header editMode={editMode} onEditModeChange={setEditMode} />
+      <Header 
+        editMode={editMode} 
+        onEditModeChange={setEditMode} 
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+      />
       
       {/* Contenedor principal de las 3 columnas */}
-      <DashboardColumns editMode={editMode} />
+      <DashboardColumns 
+        editMode={editMode} 
+        searchQuery={searchQuery}
+      />
       
       <Footer />
     </div>
