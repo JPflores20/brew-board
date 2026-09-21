@@ -119,7 +119,7 @@ const DEFAULTS: Record<PanelName, { cards: CardConfig[]; buttons: ButtonConfig[]
         label: "AGENDA DE LIMPIEZA COCTOS",
         url: "https://agenda-de-control-de-procesos.web.app/",
       },
-      { id: "sensory-one", label: "SENSORY ONE" },
+      { id: "sensory-one", label: "SENSORY ONE", url: "https://sensoryone.ab-inbev.com/" },
       { id: "prospectos-pruebas", label: "PROSPECTOS Y PRUEBAS" },
     ],
     buttons: [],
@@ -140,11 +140,30 @@ const DEFAULTS: Record<PanelName, { cards: CardConfig[]; buttons: ButtonConfig[]
         url: "https://craft-brew-insight-137b8.web.app/login",
       },
       {
+        id: "tccs",
+        label: "TCCS",
+        url: "https://10.182.4.106/d/HwdNFJWIz/tcc-s?orgId=1&refresh=5s",
+      },
+      {
         id: "smart-yeast",
         label: "LEVADURA",
         url: "https://app--levadura-7427a.us-central1.hosted.app/",
       },
-      { id: "cmf", label: "CMF" },
+      {
+        id: "cmf-1",
+        label: "CMF 1",
+        url: "https://10.182.4.106/d/5-8Si5TNk/cmf-operacion-linea-1?orgId=1&refresh=1m",
+      },
+      {
+        id: "cmf-2",
+        label: "CMF 2",
+        url: "https://10.182.4.106/d/ETe11W_Hz/cmf-operacion-linea-2?orgId=1&refresh=1m",
+      },
+      {
+        id: "unitanques",
+        label: "UNITANQUES",
+        url: "https://10.182.4.106/d/usB8xFUvz/unitanques?orgId=1",
+      },
       {
         id: "ctrl-filtros-cerveza",
         label: "FILTRACION BREWING",

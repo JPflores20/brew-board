@@ -156,8 +156,11 @@ const ICON_MAP: Record<string, React.ElementType | React.ReactNode> = {
   "analisis-kpis-calidad": BarChart2,
   "ctrl-coctos": Flame,
   "ctrl-tccs": Database,
+  "tccs": GrafanaIcon,
   "smart-yeast": FlaskConical,
-  "cmf": Settings,
+  "cmf-1": Settings,
+  "cmf-2": Settings,
+  "unitanques": TankIcon,
   "ctrl-filtros-cerveza": Filter,
   "ctrl-bbts": FilterBBTIcon,
   // Mantenimiento
