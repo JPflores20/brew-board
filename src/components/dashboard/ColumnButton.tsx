@@ -259,7 +259,7 @@ export function ColumnButton({
   if (editMode) {
     return (
       <div
-        className={`relative flex flex-col items-center justify-center p-2 gap-1 md:gap-1.5 text-center ${borderStyles} ${baseHover} ${colorStyles[accentColor]} ${className}`}
+        className={`relative flex flex-col items-center justify-center p-3 md:p-4 gap-2 md:gap-3 text-center ${borderStyles} ${baseHover} ${colorStyles[accentColor]} ${className}`}
         draggable={draggable}
         onDragStart={onDragStart}
         onDragEnter={onDragEnter}
@@ -278,7 +278,7 @@ export function ColumnButton({
       href={url || "#"}
       target={url ? "_blank" : "_self"}
       rel={url ? "noopener noreferrer" : ""}
-      className={`relative flex flex-col items-center justify-center p-2 gap-1 md:gap-1.5 text-center ${borderStyles} ${baseHover} ${colorStyles[accentColor]} ${className}`}
+      className={`relative flex flex-col items-center justify-center p-3 md:p-4 gap-2 md:gap-3 text-center ${borderStyles} ${baseHover} ${colorStyles[accentColor]} ${className}`}
     >
       {content}
     </a>

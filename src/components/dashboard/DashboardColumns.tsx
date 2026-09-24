@@ -153,13 +153,13 @@ const ICON_MAP: Record<string, React.ElementType | React.ReactNode> = {
   // Elaboracion
   "brewinsights": BarChart2,
   "quas": ClipboardList,
-  "analisis-kpis-calidad": BarChart2,
   "ctrl-coctos": Flame,
   "ctrl-tccs": Database,
   "tccs": GrafanaIcon,
   "smart-yeast": FlaskConical,
   "cmf-1": Settings,
   "cmf-2": Settings,
+  "cmfs": Settings,
   "unitanques": TankIcon,
   "ctrl-filtros-cerveza": Filter,
   "ctrl-bbts": FilterBBTIcon,
@@ -183,7 +183,6 @@ const ICON_MAP: Record<string, React.ElementType | React.ReactNode> = {
   // Ambiental
   "ryncs": Settings,
   "ctrol-descargas": Droplet,
-  "analisis-kpis-ambientales": BarChart2,
   "sorba-ollas": SorbaIcon,
 };
 
@@ -293,22 +292,35 @@ function PanelColumn({
     >
       <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-24 h-1 ${accentBar[accentColor]} rounded-b-md`}></div>
 
-      <div className="flex flex-row items-center justify-center gap-3 mb-4 mt-1">
+      <div className="flex flex-row items-center justify-center gap-3 mb-6 md:mb-8 mt-1">
         {headerIcon}
         <h2 className={`text-${accentColor}-500 font-bold tracking-[0.15em] text-[11px] md:text-xs uppercase`}>{title}</h2>
       </div>
 
-      <div className={`grid ${gridCols} gap-2 mb-2 flex-1`}>
+      <div className="grid grid-cols-6 gap-3 md:gap-4 mb-2 mt-2 flex-1">
         {cards.map((card, idx) => {
           const iconDef = ICON_MAP[card.id];
           const isReactEl = React.isValidElement(iconDef);
           const icon = isReactEl ? iconDef : (iconDef ?? Database);
 
+          let spanClass = "col-span-2";
+          const remainder = cards.length % 3;
+          const isLastRow = idx >= cards.length - remainder;
+
+          if (isLastRow) {
+            if (remainder === 1) {
+              spanClass += " col-start-3";
+            } else if (remainder === 2) {
+              if (idx === cards.length - 2) spanClass += " col-start-2";
+              if (idx === cards.length - 1) spanClass += " col-start-4";
+            }
+          }
+
           return (
             <motion.div
               layout
               key={card.id}
-              className={cards.length === 1 ? "col-start-2" : ""}
+              className={spanClass}
               transition={{ type: "spring", stiffness: 350, damping: 25 }}
             >
               <ColumnButton
@@ -454,11 +466,11 @@ export function DashboardColumns({ editMode, searchQuery }: DashboardColumnsProp
   const visibleCount = [col1Visible, col2Visible, col3Visible].filter(Boolean).length;
 
   return (
-    <div className={`grid grid-cols-1 ${visibleCount === 2 ? 'md:grid-cols-2 md:max-w-[66.666%] mx-auto' : 'md:grid-cols-3'} gap-3 md:gap-4 w-full px-2 pb-6 pt-4 flex-1 items-start`}>
+    <div className={`grid grid-cols-1 ${visibleCount === 2 ? 'md:grid-cols-2 md:max-w-[66.666%] mx-auto' : 'md:grid-cols-3'} gap-3 md:gap-4 w-full px-2 pb-6 pt-4 flex-1 items-stretch`}>
       
       {/* Columna 1 */}
       {col1Visible && (
-        <div className={`flex flex-col gap-3 md:gap-4 ${visibleCount === 1 ? 'md:col-start-2' : ''}`}>
+        <div className={`flex flex-col gap-3 md:gap-4 h-full ${visibleCount === 1 ? 'md:col-start-2' : ''}`}>
           {hasItems(dSeguridad) && (
             <PanelColumn
               title="Seguridad"
@@ -503,7 +515,7 @@ export function DashboardColumns({ editMode, searchQuery }: DashboardColumnsProp
 
       {/* Columna 2 */}
       {col2Visible && (
-        <div className={`flex flex-col gap-3 md:gap-4 ${visibleCount === 1 ? 'md:col-start-2' : ''}`}>
+        <div className={`flex flex-col gap-3 md:gap-4 h-full ${visibleCount === 1 ? 'md:col-start-2' : ''}`}>
           {hasItems(dCalidad) && (
             <PanelColumn
               title="Calidad"
@@ -548,7 +560,7 @@ export function DashboardColumns({ editMode, searchQuery }: DashboardColumnsProp
 
       {/* Columna 3 */}
       {col3Visible && (
-        <div className={`flex flex-col gap-3 md:gap-4 ${visibleCount === 1 ? 'md:col-start-2' : ''}`}>
+        <div className={`flex flex-col gap-3 md:gap-4 h-full ${visibleCount === 1 ? 'md:col-start-2' : ''}`}>
           {hasItems(dMantenimiento) && (
             <PanelColumn
               title="Mantenimiento"
